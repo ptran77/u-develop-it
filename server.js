@@ -1,7 +1,23 @@
+const mysql = require('mysql2');
 const express = require('express');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+// Connect to database
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    user: 'root',
+    password: 'Baselaird8381',
+    database: 'election'
+  },
+  console.log('Connected to the election database.')
+)
+
+db.query(`SELECT * FROM candidates`, (err, rows) => {
+  console.log(rows);
+});
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
